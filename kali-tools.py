@@ -86,29 +86,24 @@ print(f"Created {batch_created_count} new wrapper batch scripts in '{wrapper_scr
 
 # Function to check if a path is in the system PATH
 def is_path_in_system_path(directory):
-    system_path = subprocess.check_output('echo %PATH%', shell=True).decode().strip()
+    system_path = os.environ['PATH']
     return directory.lower() in (path.lower() for path in system_path.split(';'))
 
-# Adding wrapper_script_path to system PATH
 if not is_path_in_system_path(wrapper_script_path):
-    # Generate the batch script content for PATH addition
-    batch_script_content = f"""
-    @echo off
-    setx PATH "%%PATH%%;{wrapper_script_path}" /M
-    """
-    
-    # Save the batch script to a file
-    batch_file = 'add_to_path.bat'
-    with open(batch_file, 'w') as file:
-        file.write(batch_script_content)
-    
-    # Execute the batch script
-    subprocess.run(batch_file, shell=True)
-    
-    # Delete the batch script after execution
-    os.remove(batch_file)
-    
-    print(f"Added '{wrapper_script_path}' to PATH")
-    print("Terminal needs to restart for new path additions to work (Restart command prompt and try your new linux commands)")
+    # Read the current PATH
+    current_path = os.environ['PATH']
+
+    # Check if adding the new path exceeds the character limit
+    if len(current_path) + len(wrapper_script_path) + 1 > 1024:
+        print("Unable to add to PATH. The resulting PATH would be too long.")
+    else:
+        # Append the new path
+        new_path = current_path + ';' + wrapper_script_path
+
+        # Use setx to update the PATH
+        subprocess.run(f'setx PATH "{new_path}" /M', shell=True)
+
+        print(f"Added '{wrapper_script_path}' to PATH")
+        print("Please restart your system or log out and back in for the changes to take effect.")
 else:
     print(f"The directory {wrapper_script_path} is already in the system PATH.")
