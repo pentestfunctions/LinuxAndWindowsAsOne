@@ -82,5 +82,5 @@ If you find any issues or have suggestions for improvement, please [open an issu
 4. Add more exclusions other than python/lpython for things that windows has as well as the linux distro (*just add an l at the front to represent linux)
 5. Some piping doesn't work see below:
    ```bash
-   echo "deb http://http.kali.org/kali kali-rolling main non-free contrib" sudo tee /etc/apt/sources.list
+   echo "deb http://http.kali.org/kali kali-rolling main non-free contrib" | sudo tee /etc/apt/sources.list
    ```
