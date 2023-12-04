@@ -30,7 +30,7 @@ os.makedirs(wrapper_script_path, exist_ok=True)
 print("Checking WSL for binaries to add to Windows now... Please wait")
 
 # Get list of directories in user's PATH
-cmd = f'wsl -d {linux_distro} bash -c "echo $PATH"'
+cmd = f'wsl -d {linux_distro} bash -c "echo \$PATH"'
 result = subprocess.run(cmd, capture_output=True, text=True, shell=True)
 paths = result.stdout.strip().split(':')
 
