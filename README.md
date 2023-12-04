@@ -19,6 +19,10 @@ Before using **LinuxAndWindowsAsOne**, make sure you have the following prerequi
 - Windows Subsystem for Linux (WSL) installed
 - Administrative privileges on your Windows system
 
+### Updating!
+- Important notes: Whenever you install new applications in your WSL, you will need to rerun the kali-tools.py script and it will automatically add the new tools to your environment variables.
+
+
 ## Installation
 
 1. Clone the **LinuxAndWindowsAsOne** repository to your Windows system.
@@ -68,7 +72,7 @@ The script will also add the directory containing the batch scripts to your syst
 If you find any issues or have suggestions for improvement, please [open an issue](https://github.com/pentestfunctions/LinuxAndWindowsAsOne/issues) on the GitHub repository. We welcome contributions and pull requests from the community.
 
 
-## Acknowledgments
-
-- This script was created by [pentestfunctions](https://github.com/pentestfunctions).
-- Inspired by the need for seamless integration of Windows and Linux environments for penetration testing and security tasks.
+## Ideas
+1. Find all paths correctly and add them.
+2. Automatically find WSL distro and let the user menu select which they want
+3. Whenever apt-get or other well known installation commands are run, their respective commands will auto add/update.
