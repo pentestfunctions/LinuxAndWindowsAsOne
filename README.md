@@ -79,3 +79,4 @@ If you find any issues or have suggestions for improvement, please [open an issu
 1. Find all paths correctly and add them.
 2. Automatically find WSL distro and let the user menu select which they want
 3. Whenever apt-get or other well known installation commands are run, their respective commands will auto add/update.
+4. Add more exclusions other than python/lpython for things that windows has as well as the linux distro (*just add an l at the front to represent linux)
