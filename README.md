@@ -51,7 +51,7 @@ If the script has problems running as it is, make sure you have python installed
 ```bash
 mkdir C:\Tools
 cd C:\Tools
-curl https://raw.githubusercontent.com/pentestfunctions/LinuxAndWindowsAsOne/main/kali-tools.py
+powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/pentestfunctions/LinuxAndWindowsAsOne/main/kali-tools.py' -OutFile 'kali-tools.py'"
 python kali-tools.py
 ```
 
