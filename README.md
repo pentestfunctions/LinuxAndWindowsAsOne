@@ -19,6 +19,9 @@ Before using **LinuxAndWindowsAsOne**, make sure you have the following prerequi
 - Windows Subsystem for Linux (WSL) installed
 - Administrative privileges on your Windows system
 
+WSL can be installed with
+- https://www.kali.org/docs/wsl/wsl-preparations/
+
 ### Updating!
 - Important notes: Whenever you install new applications in your WSL, you will need to rerun the kali-tools.py script and it will automatically add the new tools to your environment variables.
 
