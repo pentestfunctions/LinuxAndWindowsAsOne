@@ -80,3 +80,7 @@ If you find any issues or have suggestions for improvement, please [open an issu
 2. Automatically find WSL distro and let the user menu select which they want
 3. Whenever apt-get or other well known installation commands are run, their respective commands will auto add/update.
 4. Add more exclusions other than python/lpython for things that windows has as well as the linux distro (*just add an l at the front to represent linux)
+5. Some piping doesn't work see below:
+   ```bash
+   echo "deb http://http.kali.org/kali kali-rolling main non-free contrib" sudo tee /etc/apt/sources.list
+   ```
