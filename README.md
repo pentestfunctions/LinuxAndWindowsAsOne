@@ -24,7 +24,7 @@ WSL can be installed with
 
 ### Updating!
 - Important notes: Whenever you install new applications in your WSL, you will need to rerun the kali-tools.py script and it will automatically add the new tools to your environment variables.
-
+- If your graphical interfactes (konsole/burpsuite/brave-browser etc have issues use the Graphicalfix.bat)
 
 ## Installation
 
