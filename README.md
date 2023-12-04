@@ -44,7 +44,7 @@ If the script has problems running as it is, make sure you have python installed
 ```bash
 mkdir C:\Tools
 cd C:\Tools
-wget https://raw.githubusercontent.com/pentestfunctions/LinuxAndWindowsAsOne/main/kali-tools.py
+curl https://raw.githubusercontent.com/pentestfunctions/LinuxAndWindowsAsOne/main/kali-tools.py
 python kali-tools.py
 ```
 
