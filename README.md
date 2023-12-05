@@ -1,6 +1,5 @@
 # LinuxAndWindowsAsOne
 
-![GitHub](https://img.shields.io/github/license/pentestfunctions/LinuxAndWindowsAsOne)
 ![GitHub last commit](https://img.shields.io/github/last-commit/pentestfunctions/LinuxAndWindowsAsOne)
 ![GitHub issues](https://img.shields.io/github/issues/pentestfunctions/LinuxAndWindowsAsOne)
 ![GitHub stars](https://img.shields.io/github/stars/pentestfunctions/LinuxAndWindowsAsOne)
