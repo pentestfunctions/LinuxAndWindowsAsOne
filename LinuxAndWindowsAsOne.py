@@ -127,7 +127,7 @@ def create_linux_conflict_batch_file(script_path, exe_name, ps_script_path):
 # Function to check if a path is in the system PATH
 def is_path_in_system_path(directory):
     system_path = subprocess.check_output('echo %PATH%', shell=True).decode().strip()
-    return directory.lower() in (path.lower() for path in system_path.split(';'))
+    return str(directory).lower() in (path.lower() for path in system_path.split(';'))
 
 def main():
     if not is_wsl_installed():
@@ -143,6 +143,9 @@ def main():
 
     conflicts = windows_executables.intersection(linux_executables)
     linux_unique = linux_executables - windows_executables
+
+    # Create the "powershell_scripts" directory if it doesn't exist
+    os.makedirs(f"powershell_scripts", exist_ok=True)
 
     if not os.path.exists(powershell_script_path):
         with open(powershell_script_path, 'w') as ps_file:
