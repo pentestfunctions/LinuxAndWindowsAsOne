@@ -177,10 +177,22 @@ def main():
     # Create the "powershell_scripts" directory if it doesn't exist
     os.makedirs(f"powershell_scripts", exist_ok=True)
 
+    # PowerShell content to be written to the file
+    powershell_content = """
+    param (
+        [string]$Command
+    )
+    
+    $wslCommand = "wsl -d kali-linux bash -c"
+    $bashCommand = $Command
+    Invoke-Expression "$wslCommand '$bashCommand'"
+    """
+    
+    # Check if the PowerShell file exists
+    
     if not os.path.exists(powershell_script_path):
         with open(powershell_script_path, 'w') as ps_file:
-            ps_file.write("param ($args)\n")
-            ps_file.write("wsl $args\n")
+            ps_file.write(powershell_content)
 
     os.makedirs(wrapper_script_path, exist_ok=True)
 
