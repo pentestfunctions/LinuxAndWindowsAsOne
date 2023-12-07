@@ -162,21 +162,21 @@ def main():
 
     print("Script execution complete.")
 
-	# Adding wrapper_script_path to system PATH
-	if not is_path_in_system_path(wrapper_script_path):
-	    # Get the current PATH
-	    current_path = os.environ.get('PATH', '')
-	
-	    # Append the current directory to PATH with a semicolon
-	    new_path = f"{current_path};{wrapper_script_path}"
-	
-	    # Set the updated PATH environment variable
-	    os.environ['PATH'] = new_path
-	    
-	    print(f"Added '{wrapper_script_path}' to PATH")
-	    print("You may need to open a new terminal for the changes to take effect.")
-	else:
-	    print(f"The directory {wrapper_script_path} is already in the system PATH.")
+    # Adding wrapper_script_path to system PATH
+    if not is_path_in_system_path(wrapper_script_path):
+        # Get the current PATH
+        current_path = os.environ.get('PATH', '')
+    
+        # Append the current directory to PATH with a semicolon
+        new_path = f"{current_path};{wrapper_script_path}"
+    
+        # Set the updated PATH environment variable
+        os.environ['PATH'] = new_path
+        
+        print(f"Added '{wrapper_script_path}' to PATH")
+        print("You may need to open a new terminal for the changes to take effect.")
+    else:
+        print(f"The directory {wrapper_script_path} is already in the system PATH.")
 
 
 if not is_admin():
