@@ -183,7 +183,7 @@ def main():
         [string]$Command
     )
     
-    $wslCommand = "wsl -d kali-linux bash -c"
+    $wslCommand = "wsl bash -c"
     $bashCommand = $Command
     Invoke-Expression "$wslCommand '$bashCommand'"
     """
