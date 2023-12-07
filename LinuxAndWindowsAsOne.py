@@ -124,10 +124,40 @@ def create_linux_conflict_batch_file(script_path, exe_name, ps_script_path):
             batch_file.write(batch_script_content)
             print(f"Created batch script for {exe_name}")
 
-# Function to check if a path is in the system PATH
-def is_path_in_system_path(directory):
-    system_path = subprocess.check_output('echo %PATH%', shell=True).decode().strip()
-    return str(directory).lower() in (path.lower() for path in system_path.split(';'))
+def add_to_path(subdirectory):
+    """Adds a specified subdirectory of the current working directory to the system path"""
+    current_directory = os.getcwd()  # Get the current working directory
+    program_path = os.path.join(current_directory, subdirectory)  # Append the subdirectory
+
+    if not os.path.isdir(program_path):
+        print(f"Invalid directory: {program_path}")
+        return
+
+    if os.name == "nt":  # Windows systems
+        import winreg
+        import ctypes
+
+        try:
+            with winreg.ConnectRegistry(None, winreg.HKEY_CURRENT_USER) as root:
+                with winreg.OpenKey(root, "Environment", 0, winreg.KEY_ALL_ACCESS) as key:
+                    existing_path_value, _ = winreg.QueryValueEx(key, "PATH")
+                    if program_path not in existing_path_value.split(';'):
+                        new_path_value = f"{existing_path_value};{program_path}"
+                        winreg.SetValueEx(key, "PATH", 0, winreg.REG_EXPAND_SZ, new_path_value)
+
+                        HWND_BROADCAST = 0xFFFF
+                        WM_SETTINGCHANGE = 0x1A
+                        SMTO_ABORTIFHUNG = 0x0002
+                        result = ctypes.c_long()
+                        SendMessageTimeoutW = ctypes.windll.user32.SendMessageTimeoutW
+                        SendMessageTimeoutW(HWND_BROADCAST, WM_SETTINGCHANGE, 0, "Environment", SMTO_ABORTIFHUNG, 5000, ctypes.byref(result))
+        except Exception as e:
+            print(f"Error updating system PATH: {e}")
+            return
+    else:
+        print(f"Couldn't detect OS")
+
+    print(f"Added {program_path} to path. Please restart shell or log in again for changes to take effect.")
 
 def main():
     if not is_wsl_installed():
@@ -165,22 +195,8 @@ def main():
 
     print("Script execution complete.")
 
-    # Adding wrapper_script_path to system PATH
-    if not is_path_in_system_path(wrapper_script_path):
-        # Get the current PATH
-        current_path = os.environ.get('PATH', '')
-    
-        # Append the current directory to PATH with a semicolon
-        new_path = f"{current_path};{wrapper_script_path}"
-    
-        # Set the updated PATH environment variable
-        os.environ['PATH'] = new_path
-        
-        print(f"Added '{wrapper_script_path}' to PATH")
-        print("You may need to open a new terminal for the changes to take effect.")
-    else:
-        print(f"The directory {wrapper_script_path} is already in the system PATH.")
-
+    # Call the function with the specific subdirectory you want to add
+    add_to_path("wrapper_scripts")  # Replace "wrapper_scripts" with your specific subdirectory
 
 if not is_admin():
     ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, " ".join(sys.argv), None, 1)
