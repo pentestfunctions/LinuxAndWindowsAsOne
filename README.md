@@ -14,6 +14,13 @@
 
 The script creates batch scripts that act as wrappers for Linux binaries, making them accessible from the Windows command prompt. Additionally, it adds these batch script directories to your system PATH, ensuring that you can easily run Linux commands from the Windows terminal.
 
+### Dummies explanation
+Yes essentially what this does is uses WSL already installed.
+It will find all Environment Variables Linux and create a script to execute them from Windows. 
+If that environment variable (whoami for example) already exists on windows, it will find a conflict with the linux whoami command. In this instance the user will be prompted to decide which should be the default, linux or windows. If you choose windows, you can still access the linux whoami by adding the prefix l for example lwhoami 
+
+Really that simple but was quite complex to get it working.
+
 ## INSTALL PREFERRED METHOD
 
 1. Install Python
