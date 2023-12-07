@@ -1,5 +1,9 @@
 # LinuxAndWindowsAsOne
 
+<p align="center">
+  <img src="static/winlin.gif">
+</p>
+
 ![GitHub last commit](https://img.shields.io/github/last-commit/pentestfunctions/LinuxAndWindowsAsOne)
 ![GitHub issues](https://img.shields.io/github/issues/pentestfunctions/LinuxAndWindowsAsOne)
 ![GitHub stars](https://img.shields.io/github/stars/pentestfunctions/LinuxAndWindowsAsOne)
