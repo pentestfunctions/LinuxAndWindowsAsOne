@@ -10,55 +10,38 @@
 
 The script creates batch scripts that act as wrappers for Linux binaries, making them accessible from the Windows command prompt. Additionally, it adds these batch script directories to your system PATH, ensuring that you can easily run Linux commands from the Windows terminal.
 
-## Prerequisites
+## INSTALL PREFERRED METHOD
 
-Before using **LinuxAndWindowsAsOne**, make sure you have the following prerequisites:
+1. Install Python
+   - https://www.python.org/ftp/python/3.12.0/python-3.12.0-amd64.exe
 
-- Windows 10 or later
-- Windows Subsystem for Linux (WSL) installed
-- Administrative privileges on your Windows system
+2. Install WSL with Kali Linux
+   - https://www.kali.org/docs/wsl/wsl-preparations/
 
-WSL can be installed with
-- https://www.kali.org/docs/wsl/wsl-preparations/
+3. Open a COMMAND PROMPT (NOT POWERSHELL) as ADMINISTRATOR. 
+
+```bash
+mkdir C:\Tools
+cd C:\Tools
+powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/pentestfunctions/LinuxAndWindowsAsOne/main/LinuxAndWindowsAsOne.py' -OutFile 'LinuxAndWindowsAsOne.py'"
+python LinuxAndWindowsAsOne.py
+```
+
+4. While it runs, answer the questions for any conflicts - such as "whoami" exists on linux and windows. Choosing to keep the windows variant will make the linux version "lwhoami" 
+
+Close your terminal and open a new one - Run any command!
+
+- Optional:
+  1. Rerun the script anytime when you install new software to WSL
+  2. Rerun the script anytime you wish to reorganize the conflicts, such as changing curl to for linux from lcurl
 
 ### Updating!
 - Important notes: Whenever you install new applications in your WSL, you will need to rerun the kali-tools.py script and it will automatically add the new tools to your environment variables.
 - If your graphical interfactes (konsole/burpsuite/brave-browser etc have issues use the Graphicalfix.bat)
 
-## Installation
-
-1. Clone the **LinuxAndWindowsAsOne** repository to your Windows system.
-
-```bash
-git clone https://github.com/pentestfunctions/LinuxAndWindowsAsOne.git
-```
-
-2. Move the script to a folder on your C:\\ drive, such as `C:\\Tools\\kali-tools.py`.
-
-## Usage
-
-### Running the Script
-
-**LinuxAndWindowsAsOne** is designed to be run as an administrator because it modifies environment variables and system PATH. To execute the script:
-
-1. Right-click on the script file, e.g., `kali-tools.py`, and select "Run as administrator."
-2. The script will check if you have administrative privileges and, if not, prompt you to run with elevated privileges.
-
 #### Problems?
 
-If the script has problems running as it is, make sure you have python installed on Windows and CD into your folder such as 
-```bash
-mkdir C:\Tools
-cd C:\Tools
-powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/pentestfunctions/LinuxAndWindowsAsOne/main/kali-tools.py' -OutFile 'kali-tools.py'"
-python kali-tools.py
-```
-
-### Configuration
-
-Before running the script, make sure to configure the following settings in the script:
-
-- `linux_distro`: Set this variable to the name of your preferred Linux distribution within WSL (e.g., 'kali-linux' or 'ubuntu').
+- Open a ticket.
 
 ### Adding Linux Binaries to Windows
 
@@ -75,11 +58,9 @@ If you find any issues or have suggestions for improvement, please [open an issu
 
 
 ## Ideas
-1. Find all paths correctly and add them.
-2. Automatically find WSL distro and let the user menu select which they want
-3. Whenever apt-get or other well known installation commands are run, their respective commands will auto add/update.
-4. Add more exclusions other than python/lpython for things that windows has as well as the linux distro (*just add an l at the front to represent linux)
-5. Some piping doesn't work see below:
+1. Automatically find WSL distro and let the user menu select which they want
+2. Whenever apt-get or other well known installation commands are run, their respective commands will auto add/update.
+3. Some piping doesn't work see below:
    ```bash
    echo "deb http://http.kali.org/kali kali-rolling main non-free contrib" | sudo tee /etc/apt/sources.list
    ```
